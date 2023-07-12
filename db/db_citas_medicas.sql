@@ -141,7 +141,7 @@ INSERT INTO
 
 /* CITA */
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-07-23 10:30:00",1,475899584,1089617567);
-INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-09-30",5,475899584,3456);
+INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-09-30",2,475899584,3456);
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-08-30",3,475899584,1098817567);
 
 SELECT * FROM usuario;

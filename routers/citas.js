@@ -86,7 +86,7 @@ storageCitas.get("/cantidad/:idMedico", (req, res) => {
     const { genero } = req.params;
 
     con.query(
-      /*sql*/ `SELECT cita.*, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, genero.gen_nombre, estado_cita.estcita_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN genero ON usuario.usu_genero = genero.gen_id INNER JOIN estado_cita ON cita.cit_estadoCita = estado_cita.estcita_id WHERE genero.gen_id = ? AND estado_cita.estcita_id = 5 `,
+      /*sql*/ `SELECT cita.*, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, genero.gen_nombre, estado_cita.estcita_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN genero ON usuario.usu_genero = genero.gen_id INNER JOIN estado_cita ON cita.cit_estadoCita = estado_cita.estcita_id WHERE genero.gen_id = ? AND estado_cita.estcita_id = 2 `,
       [genero],
   
       (err, data, fil) => {
