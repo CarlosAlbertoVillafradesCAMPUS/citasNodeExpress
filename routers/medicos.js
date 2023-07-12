@@ -12,6 +12,20 @@ storageMedicos.use((req,res,next) =>{
     next();
 })
 
+storageMedicos.get("/", (req,res)=>{
+
+    con.query(
+        /*sql*/`SELECT medico.*, consultorio.cons_nombre FROM medico INNER JOIN consultorio ON medico.med_consultorio = consultorio.cons_codigo`,
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al traer los datos")
+            }else{
+                res.send(data)
+            }
+        }
+    )
+})
+
 storageMedicos.get("/:especialidad", (req,res)=>{
 
     const {especialidad} = req.params;
@@ -29,5 +43,7 @@ storageMedicos.get("/:especialidad", (req,res)=>{
         }
     )
 })
+
+
 
 export default storageMedicos;
