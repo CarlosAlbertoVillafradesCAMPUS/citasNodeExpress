@@ -91,9 +91,11 @@ INSERT INTO especialidad (esp_nombre) values ('Neurocirugía');
 /* CONSULTORIO */
 
 INSERT INTO consultorio(cons_nombre) VALUES ("El Prado");
+INSERT INTO consultorio(cons_nombre) VALUES ("El Villa");
 
 /* MEDICO */
 INSERT INTO medico (med_nroMatriculaProfesional, med_nombreCompleto, med_consultorio, med_especialidad) VALUES ("425899584", "Felipe", 1, 1);
+INSERT INTO medico (med_nroMatriculaProfesional, med_nombreCompleto, med_consultorio, med_especialidad) VALUES ("1234", "Chapulin ramires", 2, 4);
 
 /* ESTADO CITA */
 INSERT INTO estado_cita (estcita_nombre) VALUES ("ACTIVA"), ('SUPENDIDA'), ('CANCELADA'), ('PERDIDA');
@@ -137,6 +139,9 @@ INSERT INTO
 
 /* CITA */
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-07-23 10:30:00",1,475899584,1089617567);
+INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-09-30 10:30:00",1,1234,1098817567);
 
-SELECT * FROM medico;
+SELECT * FROM usuario;
 SELECT cita.*, usuario.usu_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id ORDER BY usuario.usu_nombre ASC;
+
+SELECT consultorio.*, usuario.usu_id, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, cita.cit_fecha FROM usuario INNER JOIN cita ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN medico ON cita.cit_medico = medico.med_nroMatriculaProfesional INNER JOIN consultorio ON medico.med_consultorio = consultorio.cons_codigo WHERE usuario.usu_id = ?;

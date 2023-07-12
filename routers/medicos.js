@@ -12,10 +12,10 @@ storageMedicos.use((req,res,next) =>{
     next();
 })
 
-storageMedicos.get("/:especialidad", (req,res,next)=>{
+storageMedicos.get("/:especialidad", (req,res)=>{
 
     const {especialidad} = req.params;
-    
+
     con.query(
         /*sql*/`SELECT medico.*, especialidad.esp_nombre FROM medico INNER JOIN especialidad ON medico.med_especialidad = especialidad.esp_id WHERE especialidad.esp_nombre = ?`,
         [especialidad],
