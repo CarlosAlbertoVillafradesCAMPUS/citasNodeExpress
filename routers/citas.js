@@ -30,7 +30,7 @@ storageCitas.get("/proxima/:idPaciente", (req,res)=>{
     const {idPaciente} = req.params;
 
     con.query(
-        /*sql*/ `SELECT cita.*, usuario.usu_id FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id WHERE usuario.usu_id = ? ORDER BY cita.cit_fecha ASC`,
+        /*sql*/ `SELECT cita.*, usuario.usu_id FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id WHERE usuario.usu_id = ? AND cita.cit_estadoCita = 1 ORDER BY cita.cit_fecha ASC`,
         [idPaciente],
 
         (err,data,fil)=>{
