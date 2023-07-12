@@ -6,6 +6,7 @@ dotenv.config();
 let storageCitas = Router();
 
 let con = undefined;
+
 storageCitas.use((req,res,next) =>{
     let my_conexion = JSON.parse(process.env.MY_CONNECT);
     con = mysql.createPool(my_conexion);
@@ -60,5 +61,24 @@ storageCitas.get("/:fecha", (req,res)=>{
         }
     )
 })
+
+storageCitas.get("/cantidad/:idMedico", (req, res) => {
+
+    const { idMedico } = req.params;
+    const {fecha} = req.query;
+
+    con.query(
+      /*sql*/ `SELECT cita.* FROM cita WHERE cita.cit_medico = ? AND cita.cit_fecha LIKE ?`,
+      [idMedico, fecha + "%"],
+  
+      (err, data, fil) => {
+        if (err) {
+          res.status(500).send("Error al traer los datos");
+        } else {
+          res.send(data);
+        }
+      }
+    );
+  });
 
 export default storageCitas;
