@@ -136,7 +136,7 @@ INSERT INTO
     );
 
 /* CITA */
-INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-07-12 10:30:00",1,465899584,1089617567);
+INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-07-23 10:30:00",1,465899584,1089617567);
 
 SELECT * FROM cita;
 SELECT cita.*, usuario.usu_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id ORDER BY usuario.usu_nombre ASC;

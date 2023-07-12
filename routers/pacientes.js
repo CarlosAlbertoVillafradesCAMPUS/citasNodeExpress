@@ -26,4 +26,5 @@ storagePacientes.get("/", (req,res)=>{
     )
 })
 
+
 export default storagePacientes;
