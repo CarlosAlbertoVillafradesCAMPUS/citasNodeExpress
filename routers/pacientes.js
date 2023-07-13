@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import mysql from "mysql2";
 import {Router} from "express";
+import proxyPaciente from "../middleware/proxyPaciente.js";
 
 dotenv.config();
 let storagePacientes = Router();
@@ -44,6 +45,63 @@ const {idMedico} = req.params;
         )
 })
 
+storagePacientes.post("/", proxyPaciente, (req,res)=>{
+
+    // dtaos de entrada
+    // {
+    //     "nombre": "Indefinido",
+    //     "abreviatura": "IND"
+    // }
+
+    con.query(
+        /*sql*/`INSERT INTO usuario SET ?`,
+        [req.body],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al agregar el paciente")
+            }else{
+                res.send("Agregado con exito")
+            }
+        }
+    )
+})
+
+storagePacientes.put("/:idPaciente", proxyPaciente, (req,res)=>{
+
+    const { idPaciente } = req.params;
+
+    con.query(
+        /*sql*/`UPDATE usuario SET ? WHERE usu_id = ? `,
+        [req.body, idPaciente],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al modificar el paciente")
+            }else{
+                res.send("Modificado con exito")
+            }
+        }
+    )
+})
+
+storagePacientes.delete("/:idPaciente", (req,res)=>{
+
+    const { idPaciente } = req.params;
+
+    con.query(
+        /*sql*/`DELETE FROM usuario WHERE usu_id = ?`,
+        [idPaciente],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al eliminar el paciente")
+            }else{
+                res.send("Eliminado con exito")
+            }
+        }
+    )
+})
 
 
 
