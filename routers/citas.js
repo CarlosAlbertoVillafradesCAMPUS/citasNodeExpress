@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import mysql from "mysql2";
 import {Router} from "express";
+import proxyCita from "../middleware/proxyCita.js";
 
 dotenv.config();
 let storageCitas = Router();
@@ -116,5 +117,67 @@ storageCitas.get("/cantidad/:idMedico", (req, res) => {
       }
     );
   });
+  
+  storageCitas.post("/", proxyCita, (req,res)=>{
+
+    // dtaos de entrada
+  //   {
+  //     "fecha": "2023-11-21",
+  //     "estado_cita": 1,
+  //     "medico":123456789,
+  //     "usuario": 123456789
+  // }
+
+    con.query(
+        /*sql*/`INSERT INTO cita SET ?`,
+        [req.body],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al agregar la cita")
+            }else{
+                res.send("Agregado con exito")
+            }
+        }
+    )
+})
+
+storageCitas.put("/:idCita", proxyCita, (req,res)=>{
+
+    const { idCita } = req.params;
+
+    con.query(
+        /*sql*/`UPDATE cita SET ? WHERE cit_codigo = ? `,
+        [req.body, idCita],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al modificar la cita")
+            }else{
+                res.send("Modificado con exito")
+            }
+        }
+    )
+})
+
+storageCitas.delete("/:idCita", (req,res)=>{
+
+    const { idCita } = req.params;
+
+    con.query(
+        /*sql*/`DELETE FROM cita WHERE cit_codigo = ?`,
+        [idCita],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al eliminar la cita")
+            }else{
+                res.send("Eliminado con exito")
+            }
+        }
+    )
+})
+
+
 
 export default storageCitas;

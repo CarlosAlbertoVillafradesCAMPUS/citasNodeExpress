@@ -49,8 +49,17 @@ storagePacientes.post("/", proxyPaciente, (req,res)=>{
 
     // dtaos de entrada
     // {
-    //     "nombre": "Indefinido",
-    //     "abreviatura": "IND"
+    //     "cc": 123456789,
+    //     "primer_nombre": "ana",
+    //     "segundo_nombre": "maria",
+    //     "primer_apellido": "cardenas",
+    //     "segundo_apellido": "roa",
+    //     "telefono": "+57319567",
+    //     "direccion": "calle#14-16",
+    //     "email": "ana@gmail.com",
+    //     "tipo_documento": 2,
+    //     "genero": 1,
+    //     "acudiente": 1
     // }
 
     con.query(
