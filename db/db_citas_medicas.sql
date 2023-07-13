@@ -104,9 +104,10 @@ INSERT INTO estado_cita (estcita_nombre) VALUES ("ACTIVA"), ('ATENDIDA'), ('CANC
 
 /* ACUDIENTE */
 INSERT INTO acudiente (acu_nombreCompleto, acu_telefono, acu_direccion) VALUES ( "Carlos Villafrades", "3234565435", "Calle 21 nº 41-25");
+INSERT INTO acudiente (acu_nombreCompleto, acu_telefono, acu_direccion) VALUES ( "jose sanchez", "3234565435", "Calle 21 nº 41-25");
 
 /* GENERO */
-INSERT INTO genero (gen_nombre, gen_abreviatura) VALUES ("Femenino", "Fem"), ("Masculino", "Mas");
+INSERT INTO genero (gen_nombre, gen_abreviatura) VALUES ("Femenino", "F"), ("Masculino", "M");
 
 /* TIPO DOCUMENTO */
 INSERT INTO tipo_documento (tipdoc_nombre, tipdoc_abreviatura) VALUES ("Tarjeta de Identidad", "TI"), ("Cedula Ciudadani", "CC");
@@ -133,7 +134,20 @@ INSERT INTO
         "Mora",
         "3158696969",
         "Parque de los gatos",
-        "daniLaMasViral@gmail.com",
+        "dani@gmail.com",
+        1,
+        2,
+        1
+    ),
+    (
+        3456,
+        "jesus",
+        "Villafrades",
+        "sanchez",
+        "Mora",
+        "3158696969",
+        "Parque de los gatos",
+        "jesus@gmail.com",
         1,
         2,
         1
@@ -145,14 +159,3 @@ INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-09-30",2,475899584,1098817567);
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-08-30",3,475899584,1098817567);
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-08-30",3,475899584,3456);
-
-SELECT * FROM medico;
-SELECT cita.*, usuario.usu_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id ORDER BY usuario.usu_nombre ASC;
-
-SELECT consultorio.*, usuario.usu_id, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, cita.cit_fecha FROM usuario INNER JOIN cita ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN medico ON cita.cit_medico = medico.med_nroMatriculaProfesional INNER JOIN consultorio ON medico.med_consultorio = consultorio.cons_codigo WHERE usuario.usu_id = ?;
-
-SELECT medico.*, consultorio.cons_nombre FROM medico INNER JOIN consultorio ON medico.med_consultorio = consultorio.cons_codigo;
-
-SELECT cita.*, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, genero.gen_nombre, estado_cita.estcita_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN genero ON usuario.usu_genero = genero.gen_id INNER JOIN estado_cita ON cita.cit_estadoCita = estado_cita.estcita_id WHERE genero.gen_id = 2 AND estado_cita.estcita_id = 5;
-
-SELECT cita.cit_fecha, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, medico.med_nombreCompleto FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN medico ON cita.cit_medico = medico.med_nroMatriculaProfesional WHERE cita.cit_estadoCita = 3 AND cita.cit_fecha LIKE '2023-08-30%';
