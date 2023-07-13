@@ -99,4 +99,22 @@ storageCitas.get("/cantidad/:idMedico", (req, res) => {
     );
   });
 
+  storageCitas.get("/rechazadas/:fecha", (req, res) => {
+
+    const { fecha } = req.params;
+
+    con.query(
+      /*sql*/ `SELECT cita.cit_fecha, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, medico.med_nombreCompleto, estado_cita.estcita_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN medico ON cita.cit_medico = medico.med_nroMatriculaProfesional INNER JOIN estado_cita ON cita.cit_estadoCita = estado_cita.estcita_id WHERE cita.cit_estadoCita = 3 AND cita.cit_fecha LIKE ?`,
+      [fecha + "%"],
+  
+      (err, data, fil) => {
+        if (err) {
+          res.status(500).send("Error al traer los datos");
+        } else {
+          res.send(data);
+        }
+      }
+    );
+  });
+
 export default storageCitas;

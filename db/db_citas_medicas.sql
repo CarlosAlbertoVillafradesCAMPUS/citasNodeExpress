@@ -142,9 +142,11 @@ INSERT INTO
 /* CITA */
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-07-23 10:30:00",1,475899584,1089617567);
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-09-30",2,475899584,3456);
+INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-09-30",2,475899584,1098817567);
 INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-08-30",3,475899584,1098817567);
+INSERT INTO cita(cit_fecha,cit_estadoCita,cit_medico,cit_datosUsuario) VALUES ("2023-08-30",3,475899584,3456);
 
-SELECT * FROM usuario;
+SELECT * FROM cita;
 SELECT cita.*, usuario.usu_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id ORDER BY usuario.usu_nombre ASC;
 
 SELECT consultorio.*, usuario.usu_id, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, cita.cit_fecha FROM usuario INNER JOIN cita ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN medico ON cita.cit_medico = medico.med_nroMatriculaProfesional INNER JOIN consultorio ON medico.med_consultorio = consultorio.cons_codigo WHERE usuario.usu_id = ?;
@@ -152,3 +154,5 @@ SELECT consultorio.*, usuario.usu_id, usuario.usu_nombre, usuario.usu_primer_ape
 SELECT medico.*, consultorio.cons_nombre FROM medico INNER JOIN consultorio ON medico.med_consultorio = consultorio.cons_codigo;
 
 SELECT cita.*, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, genero.gen_nombre, estado_cita.estcita_nombre FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN genero ON usuario.usu_genero = genero.gen_id INNER JOIN estado_cita ON cita.cit_estadoCita = estado_cita.estcita_id WHERE genero.gen_id = 2 AND estado_cita.estcita_id = 5;
+
+SELECT cita.cit_fecha, usuario.usu_nombre, usuario.usu_primer_apellido_usuar, medico.med_nombreCompleto FROM cita INNER JOIN usuario ON cita.cit_datosUsuario = usuario.usu_id INNER JOIN medico ON cita.cit_medico = medico.med_nroMatriculaProfesional WHERE cita.cit_estadoCita = 3 AND cita.cit_fecha LIKE '2023-08-30%';

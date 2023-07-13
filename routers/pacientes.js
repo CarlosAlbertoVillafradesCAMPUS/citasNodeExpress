@@ -45,4 +45,6 @@ const {idMedico} = req.params;
 })
 
 
+
+
 export default storagePacientes;
