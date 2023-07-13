@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import mysql from "mysql2";
 import {Router} from "express";
+import proxyMedico from "../middleware/proxyMedico.js";
 
 dotenv.config();
 let storageMedicos = Router();
@@ -43,6 +44,67 @@ storageMedicos.get("/:especialidad", (req,res)=>{
         }
     )
 })
+
+storageMedicos.post("/", proxyMedico, (req,res)=>{
+
+    // dtaos de entrada
+    // {
+    //     "cc": 123456789,
+    //     "nombre": "Chapatin gonzales",
+    //     "consultorio": 2,
+    //     "especialidad": 8
+    // }
+
+    con.query(
+        /*sql*/`INSERT INTO medico SET ?`,
+        [req.body],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al agregar el medico")
+            }else{
+                res.send("Agregado con exito")
+            }
+        }
+    )
+})
+
+storageMedicos.put("/:idMedico", proxyMedico, (req,res)=>{
+
+    const { idMedico } = req.params;
+
+    con.query(
+        /*sql*/`UPDATE medico SET ? WHERE med_nroMatriculaProfesional = ? `,
+        [req.body, idMedico],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al modificar el medico")
+            }else{
+                res.send("Modificado con exito")
+            }
+        }
+    )
+})
+
+storageMedicos.delete("/:idMedico", (req,res)=>{
+
+    const { idMedico } = req.params;
+
+    con.query(
+        /*sql*/`DELETE FROM medico WHERE med_nroMatriculaProfesional = ?`,
+        [idMedico],
+
+        (err, data, fil)=>{
+            if (err) {
+                res.status(500).send("Error al eliminar el medico")
+            }else{
+                res.send("Eliminado con exito")
+            }
+        }
+    )
+})
+
 
 
 
