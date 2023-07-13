@@ -306,9 +306,9 @@ Este endpoint permite traer todas las citas realizadas por pacientes de un gener
 },...
 ```
 
-### 6-GET:  `http://"hostname":"port"/citas/rechazadas/"fecha"`
+### 6-GET:  `http://"hostname":"port"/citas/rechazadas/"mes"`
 
-Este endpoint permite traer todas las citas que fueron rechazadas y en una fecha especifica
+Este endpoint permite traer todas las citas que fueron rechazadas y en un mes especifica
 
 **Ejemplo:**
 
