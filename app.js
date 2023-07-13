@@ -8,6 +8,7 @@ import storageGenero from "./routers/genero.js";
 import storageTipoDocumento from "./routers/tipo_documento.js";
 import storageAcudiente from "./routers/acudiente.js";
 import storageEstadoCita from "./routers/estado_cita.js";
+import storageEspecialidad from "./routers/especialidad.js";
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ appExpress.use("/genero", storageGenero);
 appExpress.use("/tipoDocumento", storageTipoDocumento);
 appExpress.use("/acudiente", storageAcudiente);
 appExpress.use("/estadoCita", storageEstadoCita);
+appExpress.use("/especialidad", storageEspecialidad);
 
 let config = JSON.parse(process.env.MY_CONFIG);
 appExpress.listen(config,() =>console.log(`http://${config.hostname}:${config.port}`));
